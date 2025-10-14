@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { Categories } from "./_components/categories";
 
 export default function Home() {
   return (
@@ -11,6 +12,10 @@ export default function Home() {
         // sizes="100vw"
         alt="Banner 55% off"
       />
+
+      <div className="mt-8 flex items-center justify-center">
+        <Categories />
+      </div>
     </div>
   );
 }
