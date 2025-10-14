@@ -13,14 +13,14 @@ export default async function Home() {
   });
 
   return (
-    <div className="flex flex-col space-y-4 p-5">
+    <div className="flex flex-col space-y-6 p-5">
       <Image
         src="/banner-55-off.svg"
         width={0}
         height={0}
         className="h-auto w-full"
         // sizes="100vw"
-        alt="Banner 55% off"
+        alt="até 55% de descontos só esse mês"
       />
 
       <div className="flex items-center justify-center">
@@ -31,6 +31,15 @@ export default async function Home() {
         <h2 className="px-5 font-bold">OFERTAS</h2>
         <ProductList products={deals} />
       </div>
+
+      <Image
+        src="/banner-mouses.svg"
+        width={0}
+        height={0}
+        className="h-auto w-full"
+        // sizes="100vw"
+        alt="até 55% de descontos em mouses"
+      />
     </div>
   );
 }
