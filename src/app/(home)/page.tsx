@@ -1,9 +1,19 @@
 import Image from "next/image";
 import { Categories } from "./_components/categories";
+import { prismaClient } from "@/lib/prisma";
+import { ProductList } from "./_components/product-list";
 
-export default function Home() {
+export default async function Home() {
+  const deals = await prismaClient.product.findMany({
+    where: {
+      discountPercentage: {
+        gt: 0,
+      },
+    },
+  });
+
   return (
-    <div className="p-5">
+    <div className="flex flex-col space-y-4 p-5">
       <Image
         src="/banner-55-off.svg"
         width={0}
@@ -13,8 +23,13 @@ export default function Home() {
         alt="Banner 55% off"
       />
 
-      <div className="mt-8 flex items-center justify-center">
+      <div className="flex items-center justify-center">
         <Categories />
+      </div>
+
+      <div className="-mx-5 space-y-2">
+        <h2 className="px-5 font-bold">OFERTAS</h2>
+        <ProductList products={deals} />
       </div>
     </div>
   );

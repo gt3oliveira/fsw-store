@@ -15,12 +15,12 @@ interface CategoryItemProps {
 
 export const CategoryItem = ({ category }: CategoryItemProps) => {
   const categoryIcon = {
-    keyboards: <KeyboardIcon />,
-    monitors: <MonitorIcon />,
-    headphones: <HeadphonesIcon />,
-    mousepads: <SquareIcon />,
-    speakers: <SpeakerIcon />,
-    mouses: <MouseIcon />,
+    keyboards: <KeyboardIcon size={16} />,
+    monitors: <MonitorIcon size={16} />,
+    headphones: <HeadphonesIcon size={16} />,
+    mousepads: <SquareIcon size={16} />,
+    speakers: <SpeakerIcon size={16} />,
+    mouses: <MouseIcon size={16} />,
   };
 
   return (
@@ -28,7 +28,7 @@ export const CategoryItem = ({ category }: CategoryItemProps) => {
       variant={"outline"}
       className="flex w-full items-center justify-center rounded-lg py-3"
     >
-      {categoryIcon[category.slug as keyof typeof categoryIcon]}
+      <p>{categoryIcon[category.slug as keyof typeof categoryIcon]}</p>
       <span className="text-xs font-semibold">{category.name}</span>
     </Badge>
   );
