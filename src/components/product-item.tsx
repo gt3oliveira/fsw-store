@@ -35,14 +35,12 @@ export const ProductItem = ({ product }: ProductItemProps) => {
             <p className="font-semibold">
               {formatCurrency(product.totalPrice)}
             </p>
-            <p className="text-sm line-through opacity-75">
+            <p className="text-[11px] line-through opacity-75">
               {formatCurrency(Number(product.basePrice))}
             </p>
           </>
         ) : (
-          <p className="text-sm font-semibold">
-            {formatCurrency(product.totalPrice)}
-          </p>
+          <p className="font-semibold">{formatCurrency(product.totalPrice)}</p>
         )}
       </div>
     </div>
