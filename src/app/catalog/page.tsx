@@ -1,6 +1,6 @@
 import { Badge } from "@/components/ui/badge";
 import { prismaClient } from "@/lib/prisma";
-import { ShapesIcon } from "lucide-react";
+import { ListOrderedIcon } from "lucide-react";
 import { CategoryItem } from "./_components/category-item";
 
 export default async function CatalogPage() {
@@ -13,7 +13,7 @@ export default async function CatalogPage() {
         className="border-primary rounded-full border-2 px-3 py-[0.375rem] text-base uppercase"
       >
         <p>
-          <ShapesIcon />
+          <ListOrderedIcon />
         </p>
         Catálogo
       </Badge>
