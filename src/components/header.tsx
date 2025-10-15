@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import {
   Sheet,
+  SheetClose,
   SheetContent,
   SheetHeader,
   SheetTitle,
@@ -21,6 +22,7 @@ import {
 import { signIn, signOut, useSession } from "next-auth/react";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Separator } from "./ui/separator";
+import Link from "next/link";
 
 export const Header = () => {
   const { data: session, status } = useSession();
@@ -68,47 +70,65 @@ export const Header = () => {
             </div>
           )}
 
-          <div className="space-y-4 px-4">
+          <div className="flex flex-col gap-3 px-4">
             {status === "unauthenticated" && (
-              <Button
-                onClick={handleLoginClick}
-                variant={"outline"}
-                className="w-full justify-start"
-              >
-                <LogInIcon />
-                Fazer Login
-              </Button>
+              <SheetClose asChild>
+                <Button
+                  onClick={handleLoginClick}
+                  variant={"outline"}
+                  className="w-full justify-start"
+                >
+                  <LogInIcon />
+                  Fazer Login
+                </Button>
+              </SheetClose>
             )}
 
-            <Button variant={"outline"} className="w-full justify-start">
-              <HomeIcon />
-              Início
-            </Button>
+            <SheetClose asChild>
+              <Link href={"/"}>
+                <Button variant={"outline"} className="w-full justify-start">
+                  <HomeIcon />
+                  Início
+                </Button>
+              </Link>
+            </SheetClose>
 
-            <Button variant={"outline"} className="w-full justify-start">
-              <PercentIcon />
-              Ofertas
-            </Button>
+            <SheetClose asChild>
+              <Link href={"/deals"}>
+                <Button variant={"outline"} className="w-full justify-start">
+                  <PercentIcon />
+                  Ofertas
+                </Button>
+              </Link>
+            </SheetClose>
 
-            <Button variant={"outline"} className="w-full justify-start">
-              <ListOrderedIcon />
-              Catálogo
-            </Button>
+            <SheetClose asChild>
+              <Link href={"/catalog"}>
+                <Button variant={"outline"} className="w-full justify-start">
+                  <ListOrderedIcon />
+                  Catálogo
+                </Button>
+              </Link>
+            </SheetClose>
 
             {status === "authenticated" && (
-              <Button
-                onClick={handleLogoutClick}
-                variant={"outline"}
-                className="w-full justify-start"
-              >
-                <LogOutIcon className="text-red-500" />
-                Fazer Logout
-              </Button>
+              <SheetClose asChild>
+                <Button
+                  onClick={handleLogoutClick}
+                  variant={"outline"}
+                  className="w-full justify-start"
+                >
+                  <LogOutIcon className="text-red-500" />
+                  Fazer Logout
+                </Button>
+              </SheetClose>
             )}
           </div>
         </SheetContent>
       </Sheet>
-      <Image src="/logo.svg" width={100} height={100} alt="FSW Store" />
+      <Link href={"/"}>
+        <Image src="/logo.svg" width={100} height={100} alt="FSW Store" />
+      </Link>
       <Button size={"icon"} variant={"outline"}>
         <ShoppingCartIcon />
       </Button>
