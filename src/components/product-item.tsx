@@ -3,14 +3,21 @@ import { ProductWithTotalPrice } from "@/helpers/product";
 import Image from "next/image";
 import { Badge } from "./ui/badge";
 import { ArrowDownIcon } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface ProductItemProps {
   product: ProductWithTotalPrice;
+  className?: string;
 }
-export const ProductItem = ({ product }: ProductItemProps) => {
+export const ProductItem = ({ product, className }: ProductItemProps) => {
   return (
     <div className="mx-2 flex flex-col">
-      <div className="bg-accent relative flex size-44 items-center justify-center rounded-lg">
+      <div
+        className={cn(
+          "bg-accent relative flex size-44 items-center justify-center rounded-lg",
+          className,
+        )}
+      >
         {product.discountPercentage > 0 && (
           <Badge className="absolute top-3 left-3 rounded-full">
             <ArrowDownIcon />
