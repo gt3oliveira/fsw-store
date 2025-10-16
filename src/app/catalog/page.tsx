@@ -13,7 +13,7 @@ export default async function CatalogPage() {
         className="border-primary rounded-full border-2 px-3 py-[0.375rem] text-base uppercase"
       >
         <p>
-          <ListOrderedIcon />
+          <ListOrderedIcon size={20} />
         </p>
         Catálogo
       </Badge>
