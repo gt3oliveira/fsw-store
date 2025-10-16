@@ -1,15 +1,22 @@
 "use client";
-import { CartProduct } from "@/providers/cart";
+import { CartContext, CartProduct } from "@/providers/cart";
 import Image from "next/image";
 import { Button } from "./ui/button";
 import { MinusIcon, PlusIcon, TrashIcon } from "lucide-react";
 import { formatCurrency } from "@/helpers/format-currency";
+import { useContext } from "react";
 
 interface CartItemProps {
   product: CartProduct;
 }
 
 export const CartItem = ({ product }: CartItemProps) => {
+  const { decreaseProductQuantity } = useContext(CartContext);
+
+  const handleDecreaseQuantityClick = () => {
+    decreaseProductQuantity(product.id);
+  };
+
   return (
     <div className="flex items-center justify-between">
       <div className="flex items-center gap-4">
@@ -42,7 +49,7 @@ export const CartItem = ({ product }: CartItemProps) => {
               size={"icon"}
               variant={"outline"}
               className="h-8 w-8"
-              // onClick={handleDecreaseQuantity}
+              onClick={handleDecreaseQuantityClick}
             >
               <MinusIcon />
             </Button>
