@@ -23,6 +23,8 @@ import { signIn, signOut, useSession } from "next-auth/react";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Separator } from "./ui/separator";
 import Link from "next/link";
+import { Cart } from "./cart";
+import { Badge } from "./ui/badge";
 
 export const Header = () => {
   const { data: session, status } = useSession();
@@ -129,9 +131,29 @@ export const Header = () => {
       <Link href={"/"}>
         <Image src="/logo.svg" width={100} height={100} alt="FSW Store" />
       </Link>
-      <Button size={"icon"} variant={"outline"}>
-        <ShoppingCartIcon />
-      </Button>
+      <Sheet>
+        <SheetTrigger asChild>
+          <Button size={"icon"} variant={"outline"}>
+            <ShoppingCartIcon />
+          </Button>
+        </SheetTrigger>
+        <SheetContent>
+          <SheetHeader>
+            <SheetTitle>
+              <Badge
+                variant={"outline"}
+                className="border-primary rounded-full border-2 px-3 py-[0.375rem] text-base uppercase"
+              >
+                <p>
+                  <ShoppingCartIcon />
+                </p>
+                Carrinho
+              </Badge>
+            </SheetTitle>
+          </SheetHeader>
+          <Cart />
+        </SheetContent>
+      </Sheet>
     </Card>
   );
 };

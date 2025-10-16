@@ -3,17 +3,16 @@ import { DiscountBadge } from "@/components/discount-badge";
 import { Button } from "@/components/ui/button";
 import { formatCurrency } from "@/helpers/format-currency";
 import { ProductWithTotalPrice } from "@/helpers/product";
+import { CartContext } from "@/providers/cart";
 import { MinusIcon, PlusIcon, TruckIcon } from "lucide-react";
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 interface ProductInfoProps {
-  product: Pick<
-    ProductWithTotalPrice,
-    "basePrice" | "description" | "discountPercentage" | "totalPrice" | "name"
-  >;
+  product: ProductWithTotalPrice;
 }
 
 export const ProductInfo = ({ product }: ProductInfoProps) => {
+  const { addProduct } = useContext(CartContext);
   const [Quantity, setQuantity] = useState(1);
 
   const handleDecreaseQuantity = () => {
@@ -22,6 +21,13 @@ export const ProductInfo = ({ product }: ProductInfoProps) => {
 
   const handleIncreaseQuantity = () => {
     setQuantity(Quantity + 1);
+  };
+
+  const handleAddToCart = () => {
+    addProduct({
+      ...product,
+      quantity: Quantity,
+    });
   };
 
   return (
@@ -40,7 +46,7 @@ export const ProductInfo = ({ product }: ProductInfoProps) => {
           <div className="flex gap-1">
             <p className="text-[11px] opacity-75">De:</p>
             <p className="text-[11px] line-through opacity-75">
-              {formatCurrency(product.basePrice)}
+              {formatCurrency(Number(product.basePrice))}
             </p>
           </div>
         )}
@@ -69,7 +75,7 @@ export const ProductInfo = ({ product }: ProductInfoProps) => {
         <p className="text-justify text-sm opacity-75">{product.description}</p>
       </div>
 
-      <Button className="w-full font-bold uppercase">
+      <Button className="w-full font-bold uppercase" onClick={handleAddToCart}>
         Adicionar ao carrinho
       </Button>
 
