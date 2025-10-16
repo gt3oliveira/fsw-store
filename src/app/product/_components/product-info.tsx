@@ -1,9 +1,9 @@
 "use client";
-import { Badge } from "@/components/ui/badge";
+import { DiscountBadge } from "@/components/discount-badge";
 import { Button } from "@/components/ui/button";
 import { formatCurrency } from "@/helpers/format-currency";
 import { ProductWithTotalPrice } from "@/helpers/product";
-import { ArrowDownIcon, MinusIcon, PlusIcon, TruckIcon } from "lucide-react";
+import { MinusIcon, PlusIcon, TruckIcon } from "lucide-react";
 import { useState } from "react";
 
 interface ProductInfoProps {
@@ -33,10 +33,7 @@ export const ProductInfo = ({ product }: ProductInfoProps) => {
             {formatCurrency(product.totalPrice)}
           </h1>
           {product.discountPercentage > 0 && (
-            <Badge className="rounded-full">
-              <ArrowDownIcon />
-              {product.discountPercentage}%
-            </Badge>
+            <DiscountBadge>{product.discountPercentage}</DiscountBadge>
           )}
         </div>
         {product.discountPercentage > 0 && (
