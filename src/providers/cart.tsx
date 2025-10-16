@@ -9,8 +9,9 @@ export interface CartProduct extends ProductWithTotalPrice {
 interface ICartContext {
   products: CartProduct[];
   addProduct: (product: CartProduct) => void;
-  removeProduct: (product: CartProduct) => void;
+  removeProduct: (productId: string) => void;
   decreaseProductQuantity: (productId: string) => void;
+  increaseProductQuantity: (productId: string) => void;
   cartTotalPrice: number;
   cartBasePrice: number;
   cartTotalDiscount: number;
@@ -24,6 +25,7 @@ export const CartContext = createContext<ICartContext>({
   addProduct: () => {},
   removeProduct: () => {},
   decreaseProductQuantity: () => {},
+  increaseProductQuantity: () => {},
 } as ICartContext);
 
 export const CartProvider = ({ children }: { children: React.ReactNode }) => {
@@ -65,8 +67,22 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     );
   };
 
-  const removeProduct = (product: CartProduct) => {
-    setProducts(products.filter((p) => p.id !== product.id));
+  const increaseProductQuantity = (productId: string) => {
+    setProducts((prev) =>
+      prev.map((cartProduct) => {
+        if (cartProduct.id === productId) {
+          return {
+            ...cartProduct,
+            quantity: cartProduct.quantity + 1,
+          };
+        }
+        return cartProduct;
+      }),
+    );
+  };
+
+  const removeProduct = (productId: string) => {
+    setProducts(products.filter((p) => p.id !== productId));
   };
 
   return (
@@ -75,6 +91,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
         addProduct,
         removeProduct,
         decreaseProductQuantity,
+        increaseProductQuantity,
         cartBasePrice: 0,
         cartTotalPrice: 0,
         cartTotalDiscount: 0,
