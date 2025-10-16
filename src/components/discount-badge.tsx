@@ -8,10 +8,7 @@ interface DiscountBadgeProps {
   className?: string;
 }
 
-export const DiscountBadge = async ({
-  children,
-  className,
-}: DiscountBadgeProps) => {
+export const DiscountBadge = ({ children, className }: DiscountBadgeProps) => {
   return (
     <Badge className={cn(`rounded-full`, className)}>
       <ArrowDownIcon />
