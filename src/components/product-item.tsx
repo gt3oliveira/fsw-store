@@ -13,7 +13,7 @@ interface ProductItemProps {
 export const ProductItem = ({ product, className }: ProductItemProps) => {
   return (
     <Link href={`/product/${product.slug}`}>
-      <div className="mx-2 flex flex-col">
+      <div className="flex flex-col">
         <div
           className={cn(
             "bg-accent relative flex size-44 items-center justify-center rounded-lg",
