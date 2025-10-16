@@ -24,7 +24,6 @@ import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Separator } from "./ui/separator";
 import Link from "next/link";
 import { Cart } from "./cart";
-import { Badge } from "./ui/badge";
 
 export const Header = () => {
   const { data: session, status } = useSession();
@@ -138,19 +137,6 @@ export const Header = () => {
           </Button>
         </SheetTrigger>
         <SheetContent>
-          <SheetHeader>
-            <SheetTitle>
-              <Badge
-                variant={"outline"}
-                className="border-primary rounded-full border-2 px-3 py-[0.375rem] text-base uppercase"
-              >
-                <p>
-                  <ShoppingCartIcon />
-                </p>
-                Carrinho
-              </Badge>
-            </SheetTitle>
-          </SheetHeader>
           <Cart />
         </SheetContent>
       </Sheet>
