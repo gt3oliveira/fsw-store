@@ -30,7 +30,7 @@ export default async function Home() {
   });
 
   return (
-    <div className="flex flex-col space-y-6 p-5">
+    <div className="flex flex-col space-y-6 px-5">
       <PromoBanner
         src="/banner-55-off.svg"
         alt="até 55% de descontos só esse mês"

@@ -23,7 +23,7 @@ export default async function CategoryProducts({
   }
 
   return (
-    <div className="flex flex-col space-y-8 p-5">
+    <div className="flex flex-col space-y-8 px-5">
       <Badge
         variant={"outline"}
         className="border-primary rounded-full border-2 px-3 py-[0.375rem] text-base uppercase"
