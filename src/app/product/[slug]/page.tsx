@@ -3,6 +3,7 @@ import { ProductImages } from "../_components/product-images";
 import { ProductInfo } from "../_components/product-info";
 import { computeProductTotalPrice } from "@/helpers/product";
 import { ProductList } from "@/components/product-list";
+import { SectionTitle } from "@/components/section-title";
 
 interface ProductDetailPageProps {
   params: {
@@ -38,8 +39,8 @@ export default async function ProductDetailPage({
     <div className="space-y-6">
       <ProductImages imageUrls={product.imageUrls} name={product.name} />
       <ProductInfo product={computeProductTotalPrice(product)} />
-      <div className="flex flex-col gap-2">
-        <h3 className="px-5 font-bold">Produdos relacionados</h3>
+      <div className="mt-8 flex flex-col gap-2">
+        <SectionTitle>Produtos relacionados</SectionTitle>
         <ProductList products={product.category.products} />
       </div>
     </div>
