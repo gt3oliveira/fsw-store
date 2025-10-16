@@ -39,12 +39,14 @@ export const ProductInfo = ({ product }: ProductInfoProps) => {
             </Badge>
           )}
         </div>
-        <div className="flex gap-1">
-          <p className="text-[11px] opacity-75">De:</p>
-          <p className="text-[11px] line-through opacity-75">
-            {formatCurrency(Number(product.basePrice))}
-          </p>
-        </div>
+        {product.discountPercentage > 0 && (
+          <div className="flex gap-1">
+            <p className="text-[11px] opacity-75">De:</p>
+            <p className="text-[11px] line-through opacity-75">
+              {formatCurrency(product.basePrice)}
+            </p>
+          </div>
+        )}
       </div>
 
       <div className="flex items-center gap-4">
