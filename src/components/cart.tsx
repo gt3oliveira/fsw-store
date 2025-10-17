@@ -9,9 +9,22 @@ import { ScrollArea } from "./ui/scroll-area";
 import { Badge } from "./ui/badge";
 import { ShoppingCartIcon } from "lucide-react";
 import { Button } from "./ui/button";
+import { createOrder } from "@/actions/order";
+import { useSession } from "next-auth/react";
+import { redirect } from "next/navigation";
 
 export const Cart = () => {
+  const { data } = useSession();
   const { products, subtotal, total, totalDiscount } = useContext(CartContext);
+  console.log(data?.user);
+  const handleFinishPurchase = async () => {
+    if (!data?.user) {
+      return;
+    }
+
+    const order = await createOrder(products, (data.user as any).id);
+    redirect(`/checkout-stripe/${order.id}`);
+  };
 
   return (
     <div className="flex h-full flex-col gap-5 p-4">
@@ -78,7 +91,12 @@ export const Cart = () => {
             <p>{formatCurrency(total)}</p>
           </div>
 
-          <Button className="mt-5 font-bold uppercase">Finalizar compra</Button>
+          <Button
+            onClick={handleFinishPurchase}
+            className="mt-5 font-bold uppercase"
+          >
+            Finalizar compra
+          </Button>
         </div>
       )}
     </div>
