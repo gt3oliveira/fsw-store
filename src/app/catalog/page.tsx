@@ -1,10 +1,10 @@
-import { prismaClient } from "@/lib/prisma";
 import { ListOrderedIcon } from "lucide-react";
 import { CategoryItem } from "./_components/category-item";
 import { BadgeTitlePage } from "@/components/badge-title-page";
+import { getCategories } from "@/actions/getCategories";
 
 export default async function CatalogPage() {
-  const categories = await prismaClient.category.findMany();
+  const categories = await getCategories();
 
   return (
     <div className="flex flex-col space-y-8 px-5">

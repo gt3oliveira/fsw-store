@@ -1,17 +1,11 @@
+import { getDeals } from "@/actions/getDeals";
 import { BadgeTitlePage } from "@/components/badge-title-page";
 import { ProductItem } from "@/components/product-item";
 import { computeProductTotalPrice } from "@/helpers/product";
-import { prismaClient } from "@/lib/prisma";
 import { PercentIcon } from "lucide-react";
 
 export default async function DealsPage() {
-  const deals = await prismaClient.product.findMany({
-    where: {
-      discountPercentage: {
-        gt: 0,
-      },
-    },
-  });
+  const deals = await getDeals();
 
   return (
     <div className="flex flex-col space-y-8 px-5">

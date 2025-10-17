@@ -1,22 +1,15 @@
+import { getCategory } from "@/actions/getCategory";
 import { BadgeTitlePage } from "@/components/badge-title-page";
 import { ProductItem } from "@/components/product-item";
 import { CATEGORY_ICON } from "@/constants/category-icon";
 import { computeProductTotalPrice } from "@/helpers/product";
-import { prismaClient } from "@/lib/prisma";
 
 export default async function CategoryProducts({
   params,
 }: {
   params: { slug: string };
 }) {
-  const category = await prismaClient.category.findFirst({
-    where: {
-      slug: params.slug,
-    },
-    include: {
-      products: true,
-    },
-  });
+  const category = await getCategory(params.slug);
 
   if (!category) {
     return null;

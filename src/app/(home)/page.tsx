@@ -1,33 +1,15 @@
 import { Categories } from "./_components/categories";
-import { prismaClient } from "@/lib/prisma";
 import { ProductList } from "../../components/product-list";
 import { SectionTitle } from "../../components/section-title";
 import { PromoBanner } from "./_components/promo-banner";
+import { getDeals } from "@/actions/getDeals";
+import { getKeyboards } from "@/actions/getKeyboards";
+import { getMouses } from "@/actions/getMouses";
 
 export default async function Home() {
-  const deals = await prismaClient.product.findMany({
-    where: {
-      discountPercentage: {
-        gt: 0,
-      },
-    },
-  });
-
-  const keyboards = await prismaClient.product.findMany({
-    where: {
-      category: {
-        slug: "keyboards",
-      },
-    },
-  });
-
-  const mouses = await prismaClient.product.findMany({
-    where: {
-      category: {
-        slug: "mouses",
-      },
-    },
-  });
+  const deals = await getDeals();
+  const keyboards = await getKeyboards();
+  const mouses = await getMouses();
 
   return (
     <div className="flex flex-col space-y-6 px-5">
