@@ -11,19 +11,14 @@ import {
   PercentIcon,
   ShoppingCartIcon,
 } from "lucide-react";
-import {
-  Sheet,
-  SheetClose,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Separator } from "./ui/separator";
 import Link from "next/link";
 import { Cart } from "./cart";
+import { SheetMenuItem, SheetMenuItemLink } from "./sheet-menu-item";
+import { BadgeTitlePage } from "./badge-title-page";
 
 export const Header = () => {
   const { data: session, status } = useSession();
@@ -44,9 +39,12 @@ export const Header = () => {
           </Button>
         </SheetTrigger>
         <SheetContent side={"left"}>
-          <SheetHeader className="text-lg font-semibold">
-            <SheetTitle>Menu</SheetTitle>
-          </SheetHeader>
+          <BadgeTitlePage className="m-4">
+            <p>
+              <MenuIcon size={20} />
+            </p>
+            Menu
+          </BadgeTitlePage>
 
           {status === "authenticated" && session?.user && (
             <div className="flex flex-col">
@@ -73,63 +71,41 @@ export const Header = () => {
 
           <div className="flex flex-col gap-3 px-4">
             {status === "unauthenticated" && (
-              <SheetClose asChild>
-                <Button
-                  onClick={handleLoginClick}
-                  variant={"outline"}
-                  className="w-full justify-start"
-                >
-                  <LogInIcon />
-                  Fazer Login
-                </Button>
-              </SheetClose>
+              <SheetMenuItem onclick={handleLoginClick}>
+                <LogInIcon />
+                Fazer Login
+              </SheetMenuItem>
             )}
 
-            <SheetClose asChild>
-              <Link href={"/"}>
-                <Button variant={"outline"} className="w-full justify-start">
-                  <HomeIcon />
-                  Início
-                </Button>
-              </Link>
-            </SheetClose>
+            <SheetMenuItemLink href="/">
+              <HomeIcon />
+              Início
+            </SheetMenuItemLink>
 
-            <SheetClose asChild>
-              <Link href={"/deals"}>
-                <Button variant={"outline"} className="w-full justify-start">
-                  <PercentIcon />
-                  Ofertas
-                </Button>
-              </Link>
-            </SheetClose>
+            <SheetMenuItemLink href="/deals">
+              <PercentIcon />
+              Ofertas
+            </SheetMenuItemLink>
 
-            <SheetClose asChild>
-              <Link href={"/catalog"}>
-                <Button variant={"outline"} className="w-full justify-start">
-                  <ListOrderedIcon />
-                  Catálogo
-                </Button>
-              </Link>
-            </SheetClose>
+            <SheetMenuItemLink href="/catalog">
+              <ListOrderedIcon />
+              Catálogo
+            </SheetMenuItemLink>
 
             {status === "authenticated" && (
-              <SheetClose asChild>
-                <Button
-                  onClick={handleLogoutClick}
-                  variant={"outline"}
-                  className="w-full justify-start"
-                >
-                  <LogOutIcon className="text-red-500" />
-                  Fazer Logout
-                </Button>
-              </SheetClose>
+              <SheetMenuItem onclick={handleLogoutClick}>
+                <LogOutIcon className="text-red-500" />
+                Fazer Logout
+              </SheetMenuItem>
             )}
           </div>
         </SheetContent>
       </Sheet>
+
       <Link href={"/"}>
         <Image src="/logo.svg" width={100} height={100} alt="FSW Store" />
       </Link>
+
       <Sheet>
         <SheetTrigger asChild>
           <Button size={"icon"} variant={"outline"}>
