@@ -1,3 +1,4 @@
+"use client";
 import Link from "next/link";
 import { Button } from "./ui/button";
 import { SheetClose } from "./ui/sheet";
@@ -8,7 +9,7 @@ interface SheetMenuItemProps {
   onclick?: () => void;
 }
 
-export const SheetMenuItem = ({ children, onclick }: SheetMenuItemProps) => {
+export const MenuItemSheet = ({ children, onclick }: SheetMenuItemProps) => {
   return (
     <SheetClose asChild>
       <Button
@@ -22,7 +23,7 @@ export const SheetMenuItem = ({ children, onclick }: SheetMenuItemProps) => {
   );
 };
 
-export const SheetMenuItemLink = ({ children, href }: SheetMenuItemProps) => {
+export const MenuItemSheetLink = ({ children, href }: SheetMenuItemProps) => {
   return (
     <SheetClose asChild>
       <Link href={href as string}>

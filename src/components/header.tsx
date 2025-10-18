@@ -8,6 +8,7 @@ import {
   LogInIcon,
   LogOutIcon,
   MenuIcon,
+  PackageCheckIcon,
   PercentIcon,
   ShoppingCartIcon,
 } from "lucide-react";
@@ -17,7 +18,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Separator } from "./ui/separator";
 import Link from "next/link";
 import { Cart } from "./cart";
-import { SheetMenuItem, SheetMenuItemLink } from "./sheet-menu-item";
+import { MenuItemSheet, MenuItemSheetLink } from "./sheet-menu-item";
 import { BadgeTitlePage } from "./badge-title-page";
 
 export const Header = () => {
@@ -71,32 +72,37 @@ export const Header = () => {
 
           <div className="flex flex-col gap-3 px-4">
             {status === "unauthenticated" && (
-              <SheetMenuItem onclick={handleLoginClick}>
+              <MenuItemSheet onclick={handleLoginClick}>
                 <LogInIcon />
                 Fazer Login
-              </SheetMenuItem>
+              </MenuItemSheet>
             )}
 
-            <SheetMenuItemLink href="/">
+            <MenuItemSheetLink href="/">
               <HomeIcon />
               Início
-            </SheetMenuItemLink>
+            </MenuItemSheetLink>
 
-            <SheetMenuItemLink href="/deals">
+            <MenuItemSheetLink href="/orders">
+              <PackageCheckIcon />
+              Meus pedidos
+            </MenuItemSheetLink>
+
+            <MenuItemSheetLink href="/deals">
               <PercentIcon />
               Ofertas
-            </SheetMenuItemLink>
+            </MenuItemSheetLink>
 
-            <SheetMenuItemLink href="/catalog">
+            <MenuItemSheetLink href="/catalog">
               <ListOrderedIcon />
               Catálogo
-            </SheetMenuItemLink>
+            </MenuItemSheetLink>
 
             {status === "authenticated" && (
-              <SheetMenuItem onclick={handleLogoutClick}>
+              <MenuItemSheet onclick={handleLogoutClick}>
                 <LogOutIcon className="text-red-500" />
                 Fazer Logout
-              </SheetMenuItem>
+              </MenuItemSheet>
             )}
           </div>
         </SheetContent>
