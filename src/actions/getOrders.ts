@@ -1,9 +1,9 @@
 import { prismaClient } from "@/lib/prisma";
 
-export const getOrders = async (orderId: string) => {
-  return await prismaClient.order.findUnique({
+export const getOrders = async (userId: string) => {
+  return await prismaClient.order.findMany({
     where: {
-      id: orderId,
+      userId,
     },
     include: {
       orderProducts: {
@@ -11,12 +11,9 @@ export const getOrders = async (orderId: string) => {
           product: true,
         },
       },
-      user: {
-        select: {
-          name: true,
-          email: true,
-        },
-      },
+    },
+    orderBy: {
+      createdAt: "desc",
     },
   });
 };
