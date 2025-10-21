@@ -14,6 +14,15 @@ export default async function CheckoutStripePage({
 }) {
   const order = await getOrder(params.id);
 
+  const total = order?.orderProducts.reduce(
+    (acc, product) =>
+      acc +
+      Number(product.basePrice) *
+        (1 - product.discountPercentage / 100) *
+        product.quantity,
+    0,
+  );
+
   return (
     <div className="absolute top-0 z-10 flex h-full w-full flex-col bg-white px-12 py-4">
       <div className="flex flex-col items-center gap-8 text-black">
@@ -47,12 +56,7 @@ export default async function CheckoutStripePage({
                 } itens`
               : order?.orderProducts.at(0)?.product.name}
           </p>
-          <p className="text-2xl font-bold">
-            {formatCurrency(
-              Number(order?.orderProducts.at(0)?.basePrice) *
-                Number(order?.orderProducts.at(0)?.quantity),
-            )}
-          </p>
+          <p className="text-2xl font-bold">{formatCurrency(total || 0)}</p>
           <p className="line-clamp-2 text-center text-xs opacity-75">
             Escolha sua forma de pagamento ideal e conclua sua compra com
             segurança.
