@@ -1,19 +1,19 @@
 import { ListOrderedIcon } from "lucide-react";
 import { CategoryItem } from "./_components/category-item";
-import { BadgeTitlePage } from "@/components/badge-title-page";
 import { getCategories } from "@/actions/getCategories";
+import { Badge } from "@/components/ui/badge";
 
 export default async function CatalogPage() {
   const categories = await getCategories();
 
   return (
     <div className="flex flex-col space-y-8 px-5">
-      <BadgeTitlePage>
+      <Badge variant={"heading"}>
         <p>
           <ListOrderedIcon size={20} />
         </p>
         Catálogo
-      </BadgeTitlePage>
+      </Badge>
 
       <div className="grid w-full grid-cols-2 gap-6">
         {categories.map((category) => (

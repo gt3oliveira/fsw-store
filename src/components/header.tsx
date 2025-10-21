@@ -24,11 +24,13 @@ import { Separator } from "./ui/separator";
 import Link from "next/link";
 import { Cart } from "./cart";
 import { MenuItemSheet, MenuItemSheetLink } from "./sheet-menu-item";
-import { BadgeTitlePage } from "./badge-title-page";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { CartContext } from "@/providers/cart";
+import { Badge } from "./ui/badge";
 
 export const Header = () => {
   const { data: session, status } = useSession();
+  const { products } = useContext(CartContext);
   const [OpenCart, setOpenCart] = useState(false);
   async function handleLoginClick() {
     await signIn();
@@ -48,12 +50,12 @@ export const Header = () => {
         </SheetTrigger>
         <SheetContent side={"left"}>
           <SheetTitle className="sr-only">menu</SheetTitle>
-          <BadgeTitlePage className="m-4">
+          <Badge variant={"heading"} className="m-4">
             <p>
               <MenuIcon size={20} />
             </p>
             Menu
-          </BadgeTitlePage>
+          </Badge>
 
           {status === "authenticated" && session?.user && (
             <div className="flex flex-col">
@@ -121,9 +123,14 @@ export const Header = () => {
       </Link>
 
       <Sheet open={OpenCart} onOpenChange={setOpenCart}>
-        <SheetTrigger asChild>
+        <SheetTrigger asChild className="relative">
           <Button size={"icon"} variant={"outline"}>
             <ShoppingCartIcon />
+            {products.length > 0 && (
+              <span className="bg-primary absolute top-0 right-0 h-4 w-4 rounded-full text-center text-xs opacity-70">
+                {products.length}
+              </span>
+            )}
           </Button>
         </SheetTrigger>
         <SheetContent className="w-[420px]">

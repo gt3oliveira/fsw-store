@@ -1,9 +1,9 @@
-import { BadgeTitlePage } from "@/components/badge-title-page";
 import { authOptions } from "@/lib/auth";
 import { PackageCheckIcon } from "lucide-react";
 import { getServerSession } from "next-auth";
 import { OrderItem } from "./_components/order-item";
 import { getOrders } from "@/actions/getOrders";
+import { Badge } from "@/components/ui/badge";
 
 export default async function OrdersPage() {
   const session = await getServerSession(authOptions);
@@ -21,12 +21,12 @@ export default async function OrdersPage() {
 
   return (
     <div className="flex flex-col space-y-8 px-5">
-      <BadgeTitlePage>
+      <Badge variant={"heading"}>
         <p>
           <PackageCheckIcon size={20} />
         </p>
         Meus Pedidos
-      </BadgeTitlePage>
+      </Badge>
 
       <div className="space-y-5">
         {orders.map((order) => (
