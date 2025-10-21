@@ -25,3 +25,10 @@ export const createOrder = async (
 
   return order;
 };
+
+export const updateOrder = async (orderId: string) => {
+  await prismaClient.order.update({
+    where: { id: orderId },
+    data: { status: "PAYMENT_CONFIRMED" },
+  });
+};
