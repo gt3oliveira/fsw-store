@@ -1,28 +1,40 @@
 "use client";
 import { CartContext } from "@/providers/cart";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { CartItem } from "./cart-item";
 import { computeProductTotalPrice } from "@/helpers/product";
 import { Separator } from "./ui/separator";
 import { formatCurrency } from "@/helpers/format-currency";
 import { ScrollArea } from "./ui/scroll-area";
 import { Badge } from "./ui/badge";
-import { ShoppingCartIcon } from "lucide-react";
+import { Loader2Icon, ShoppingCartIcon } from "lucide-react";
 import { Button } from "./ui/button";
 import { createOrder } from "@/actions/order";
 import { useSession } from "next-auth/react";
 import { redirect } from "next/navigation";
 
-export const Cart = () => {
+interface CartProps {
+  onClose: (isOpen: boolean) => void;
+}
+
+export const Cart = ({ onClose }: CartProps) => {
   const { data } = useSession();
-  const { products, subtotal, total, totalDiscount } = useContext(CartContext);
-  console.log(data?.user);
+  const { products, subtotal, total, totalDiscount, clearCart } =
+    useContext(CartContext);
+
+  const [IsLoading, setIsLoading] = useState(false);
+
   const handleFinishPurchase = async () => {
+    setIsLoading(true);
     if (!data?.user) {
       return;
     }
 
+    await new Promise((resolve) => setTimeout(resolve, 2000));
     const order = await createOrder(products, (data.user as any).id);
+    clearCart();
+    setIsLoading(false);
+    onClose(false);
     redirect(`/checkout-stripe/${order.id}`);
   };
 
@@ -94,7 +106,9 @@ export const Cart = () => {
           <Button
             onClick={handleFinishPurchase}
             className="mt-5 font-bold uppercase"
+            disabled={IsLoading}
           >
+            {IsLoading && <Loader2Icon className="animate-spin" />}
             Finalizar compra
           </Button>
         </div>

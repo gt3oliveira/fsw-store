@@ -25,9 +25,11 @@ import Link from "next/link";
 import { Cart } from "./cart";
 import { MenuItemSheet, MenuItemSheetLink } from "./sheet-menu-item";
 import { BadgeTitlePage } from "./badge-title-page";
+import { useState } from "react";
 
 export const Header = () => {
   const { data: session, status } = useSession();
+  const [OpenCart, setOpenCart] = useState(false);
   async function handleLoginClick() {
     await signIn();
   }
@@ -118,7 +120,7 @@ export const Header = () => {
         <Image src="/logo.svg" width={100} height={100} alt="FSW Store" />
       </Link>
 
-      <Sheet>
+      <Sheet open={OpenCart} onOpenChange={setOpenCart}>
         <SheetTrigger asChild>
           <Button size={"icon"} variant={"outline"}>
             <ShoppingCartIcon />
@@ -126,7 +128,7 @@ export const Header = () => {
         </SheetTrigger>
         <SheetContent className="w-[420px]">
           <SheetTitle className="sr-only">Carrinho</SheetTitle>
-          <Cart />
+          <Cart onClose={setOpenCart} />
         </SheetContent>
       </Sheet>
     </Card>
