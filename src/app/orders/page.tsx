@@ -23,6 +23,9 @@ export default async function OrdersPage() {
         },
       },
     },
+    orderBy: {
+      createdAt: "desc",
+    },
   });
 
   return (
