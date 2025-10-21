@@ -17,7 +17,11 @@ export default async function OrdersPage() {
       userId: (user as any).id,
     },
     include: {
-      orderProducts: true,
+      orderProducts: {
+        include: {
+          product: true,
+        },
+      },
     },
   });
 
