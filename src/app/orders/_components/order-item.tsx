@@ -49,8 +49,10 @@ export const OrderItem = ({ order }: OrderItemProps) => {
         <AccordionItem value={order.id}>
           <AccordionTrigger>
             <div className="flex flex-col gap-1 text-left">
-              <p>Pedido com {order.orderProducts.length} produto(s)</p>
-              <span className="text-sm opacity-75">
+              <p className="uppercase">
+                Pedido com {order.orderProducts.length} produto(s)
+              </p>
+              <span className="text-sm opacity-60">
                 Feito em {dayjs(order.createdAt).format("DD/MM/YYYY")}
               </span>
             </div>
