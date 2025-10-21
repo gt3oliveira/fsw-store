@@ -12,7 +12,12 @@ import {
   PercentIcon,
   ShoppingCartIcon,
 } from "lucide-react";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import {
+  Sheet,
+  SheetContent,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { Separator } from "./ui/separator";
@@ -40,6 +45,7 @@ export const Header = () => {
           </Button>
         </SheetTrigger>
         <SheetContent side={"left"}>
+          <SheetTitle className="sr-only">menu</SheetTitle>
           <BadgeTitlePage className="m-4">
             <p>
               <MenuIcon size={20} />
