@@ -31,7 +31,7 @@ export const Cart = ({ onClose }: CartProps) => {
     }
 
     await new Promise((resolve) => setTimeout(resolve, 2000));
-    const order = await createOrder(products, (data.user as any).id);
+    const order = await createOrder(products, data.user.id);
     clearCart();
     setIsLoading(false);
     onClose(false);
