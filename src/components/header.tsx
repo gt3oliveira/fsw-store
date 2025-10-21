@@ -125,6 +125,7 @@ export const Header = () => {
           </Button>
         </SheetTrigger>
         <SheetContent className="w-[420px]">
+          <SheetTitle className="sr-only">Carrinho</SheetTitle>
           <Cart />
         </SheetContent>
       </Sheet>
