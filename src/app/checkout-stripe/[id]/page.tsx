@@ -2,7 +2,7 @@ import { Badge } from "@/components/ui/badge";
 import { ArrowLeftIcon } from "lucide-react";
 import Link from "next/link";
 import { FaStripe } from "react-icons/fa";
-import { getOrders } from "@/actions/getOrders";
+import { getOrder } from "@/actions/getOrder";
 import Image from "next/image";
 import { formatCurrency } from "@/helpers/format-currency";
 import { PaymentButton } from "../_components/payment-button";
@@ -12,7 +12,7 @@ export default async function CheckoutStripePage({
 }: {
   params: { id: string };
 }) {
-  const order = await getOrders(params.id);
+  const order = await getOrder(params.id);
 
   return (
     <div className="absolute top-0 z-10 flex h-full w-full flex-col bg-white px-12 py-4">
