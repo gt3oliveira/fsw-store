@@ -1,6 +1,6 @@
 import { Categories } from "./_components/categories";
-import { ProductList } from "../../components/product-list";
-import { SectionTitle } from "../../components/section-title";
+import { ProductList } from "../../../components/product-list";
+import { SectionTitle } from "../../../components/section-title";
 import { PromoBanner } from "./_components/promo-banner";
 import { getDeals } from "@/actions/getDeals";
 import { getKeyboards } from "@/actions/getKeyboards";
