@@ -26,7 +26,10 @@ export default async function CategoryProducts({
         {category.products.map((product) => (
           <ProductItem
             key={product.id}
-            product={computeProductTotalPrice(product)}
+            product={{
+              ...product,
+              totalPrice: computeProductTotalPrice(product),
+            }}
             className="h-[176px] w-full"
           />
         ))}

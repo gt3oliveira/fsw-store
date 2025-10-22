@@ -2,8 +2,14 @@ import { DataTable } from "@/components/ui/data-table";
 import { ProductWithTotalPrice } from "@/helpers/product";
 import { columns } from "./columns";
 
+export type ProductWithTotalPriceAndCategory = ProductWithTotalPrice & {
+  category: {
+    name: string;
+  };
+};
+
 interface ProductsTableProps {
-  products: ProductWithTotalPrice[];
+  products: ProductWithTotalPriceAndCategory[];
 }
 
 export const ProductsTable = ({ products }: ProductsTableProps) => {

@@ -1,15 +1,15 @@
 "use client";
 import { formatCurrency } from "@/helpers/format-currency";
-import { ProductWithTotalPrice } from "@/helpers/product";
 import { ColumnDef } from "@tanstack/react-table";
+import { ProductWithTotalPriceAndCategory } from "./products-table";
 
-export const columns: ColumnDef<ProductWithTotalPrice>[] = [
+export const columns: ColumnDef<ProductWithTotalPriceAndCategory>[] = [
   {
     accessorKey: "name",
     header: "Nome",
   },
   {
-    accessorKey: "",
+    accessorKey: "category.name",
     header: "Categoria",
   },
   {

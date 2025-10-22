@@ -7,7 +7,7 @@ interface OrderProductItemProps {
   orderProduct: Prisma.OrderProductGetPayload<{ include: { product: true } }>;
 }
 export const OrderProductItem = ({ orderProduct }: OrderProductItemProps) => {
-  const productWithTotalPrice = computeProductTotalPrice(orderProduct.product);
+  const productTotalPrice = computeProductTotalPrice(orderProduct.product);
 
   return (
     <div className="flex">
@@ -31,10 +31,8 @@ export const OrderProductItem = ({ orderProduct }: OrderProductItemProps) => {
             <div className="space-y-2">
               <p className="text-xs">{orderProduct.product.name}</p>
               <div className="flex items-center gap-2">
-                <p className="font-bold">
-                  {formatCurrency(productWithTotalPrice.totalPrice)}
-                </p>
-                {productWithTotalPrice.discountPercentage > 0 && (
+                <p className="font-bold">{formatCurrency(productTotalPrice)}</p>
+                {orderProduct.discountPercentage > 0 && (
                   <p className="text-xs line-through opacity-75">
                     {formatCurrency(Number(orderProduct.basePrice))}
                   </p>

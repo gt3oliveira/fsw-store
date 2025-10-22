@@ -2,14 +2,19 @@ import { getProducts } from "@/actions/getProducts";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { PackageIcon, PlusIcon } from "lucide-react";
-import { ProductsTable } from "./_components/products-table";
+import {
+  ProductsTable,
+  ProductWithTotalPriceAndCategory,
+} from "./_components/products-table";
 import { computeProductTotalPrice } from "@/helpers/product";
 
 export default async function ProductsPage() {
   const products = await getProducts();
-  const productsWithTotalPrice = products.map((product) =>
-    computeProductTotalPrice(product),
-  );
+  const productsWithTotalPrice: ProductWithTotalPriceAndCategory[] =
+    products.map((product) => ({
+      ...product,
+      totalPrice: computeProductTotalPrice(product),
+    }));
 
   return (
     <div className="flex w-full flex-col space-y-10 p-10">

@@ -21,7 +21,12 @@ export default async function ProductDetailPage({
   return (
     <div className="space-y-6">
       <ProductImages imageUrls={product.imageUrls} name={product.name} />
-      <ProductInfo product={computeProductTotalPrice(product)} />
+      <ProductInfo
+        product={{
+          ...product,
+          totalPrice: computeProductTotalPrice(product),
+        }}
+      />
       <div className="mt-8 flex flex-col gap-2">
         <SectionTitle>Produtos relacionados</SectionTitle>
         <ProductList products={product.category.products} />
