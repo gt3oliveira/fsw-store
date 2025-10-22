@@ -21,46 +21,42 @@ export const Sidebar = () => {
       </Link>
 
       <div className="flex w-full flex-col gap-3">
-        <Button
-          variant={"outline"}
-          className={`justify-start ${path === "/dashboard" && "ring-primary ring-2"}`}
-          asChild
-        >
-          <Link href={"/dashboard"}>
+        <Link href={"/dashboard"}>
+          <Button
+            variant={"outline"}
+            className={`w-full justify-start ${path === "/dashboard" && "ring-primary ring-2"}`}
+          >
             <LayoutDashboardIcon />
             Dashboard
-          </Link>
-        </Button>
-        <Button
-          variant={"outline"}
-          className={`justify-start ${path === "/dashboard/products" && "ring-primary ring-2"}`}
-          asChild
-        >
-          <Link href="/dashboard/products">
+          </Button>
+        </Link>
+        <Link href="/dashboard/products">
+          <Button
+            variant={"outline"}
+            className={`w-full justify-start ${path === "/dashboard/products" && "ring-primary ring-2"}`}
+          >
             <PackageIcon />
             Produtos
-          </Link>
-        </Button>
-        <Button
-          variant={"outline"}
-          className={`justify-start ${path === "/dashboard/categories" && "ring-primary ring-2"}`}
-          asChild
-        >
-          <Link href="/dashboard/categories">
+          </Button>
+        </Link>
+        <Link href="/dashboard/categories">
+          <Button
+            variant={"outline"}
+            className={`w-full justify-start ${path === "/dashboard/categories" && "ring-primary ring-2"}`}
+          >
             <ListOrderedIcon />
             Categorias
-          </Link>
-        </Button>
-        <Button
-          variant={"outline"}
-          className={`justify-start ${path === "/dashboard/deals" && "ring-primary ring-2"}`}
-          asChild
-        >
-          <Link href="/dashboard/deals">
+          </Button>
+        </Link>
+        <Link href="/dashboard/deals">
+          <Button
+            variant={"outline"}
+            className={`w-full justify-start ${path === "/dashboard/deals" && "ring-primary ring-2"}`}
+          >
             <PackageCheckIcon />
             Pedidos
-          </Link>
-        </Button>
+          </Button>
+        </Link>
       </div>
 
       <div className="mt-auto flex w-full flex-col">
