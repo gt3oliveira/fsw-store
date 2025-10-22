@@ -26,7 +26,7 @@ export default async function CategoriesPage() {
         </Button>
       </div>
 
-      <div>
+      <div className="overflow-y-auto">
         <CategoriesTable categories={categories} />
       </div>
     </div>

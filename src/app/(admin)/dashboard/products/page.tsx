@@ -35,7 +35,7 @@ export default async function ProductsPage() {
         </Button>
       </div>
 
-      <div>
+      <div className="overflow-y-auto">
         <ProductsTable products={productsWithTotalPrice} />
       </div>
     </div>
