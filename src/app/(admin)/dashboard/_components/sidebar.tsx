@@ -48,10 +48,10 @@ export const Sidebar = () => {
             Categorias
           </Button>
         </Link>
-        <Link href="/dashboard/deals">
+        <Link href="/dashboard/orders">
           <Button
             variant={"outline"}
-            className={`w-full justify-start ${path === "/dashboard/deals" && "ring-primary ring-2"}`}
+            className={`w-full justify-start ${path === "/dashboard/orders" && "ring-primary ring-2"}`}
           >
             <PackageCheckIcon />
             Pedidos
