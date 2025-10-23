@@ -3,7 +3,7 @@ import { formatCurrency } from "@/helpers/format-currency";
 import { ColumnDef } from "@tanstack/react-table";
 import { ProductWithTotalPriceAndCategory } from "./products-table";
 
-export const columns: ColumnDef<ProductWithTotalPriceAndCategory>[] = [
+export const columnsProducts: ColumnDef<ProductWithTotalPriceAndCategory>[] = [
   {
     accessorKey: "name",
     header: "Nome",
@@ -29,7 +29,15 @@ export const columns: ColumnDef<ProductWithTotalPriceAndCategory>[] = [
     },
   },
   {
-    accessorKey: "",
+    accessorKey: "orderProduct",
     header: "Vendidos",
+    cell: ({ row }) => {
+      const orderProduct = row.original.orderProduct;
+      const totalSold = orderProduct.reduce(
+        (acc, curr) => acc + curr.quantity,
+        0,
+      );
+      return totalSold === 0 ? "" : totalSold;
+    },
   },
 ];
