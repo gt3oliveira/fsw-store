@@ -12,7 +12,7 @@ import { Separator } from "@/components/ui/separator";
 import { formatCurrency } from "@/helpers/format-currency";
 import { useMemo } from "react";
 import { computeProductTotalPrice } from "@/helpers/product";
-import { formatStatus } from "../helpers/status";
+import { formatStatus } from "../app/(shop)/orders/helpers/status";
 
 interface OrderItemProps {
   order: Prisma.OrderGetPayload<{
@@ -48,18 +48,45 @@ export const OrderItem = ({ order }: OrderItemProps) => {
       <Accordion type="single" collapsible>
         <AccordionItem value={order.id}>
           <AccordionTrigger>
-            <div className="flex flex-col gap-1 text-left">
-              <p className="uppercase">
-                Pedido com {order.orderProducts.length} produto(s)
-              </p>
-              <span className="text-sm opacity-60">
-                Feito em {dayjs(order.createdAt).format("DD/MM/YYYY")}
-              </span>
+            <div className="flex w-full text-left">
+              <div className="flex flex-1 flex-col gap-1 text-left">
+                <p className="uppercase">
+                  Pedido com {order.orderProducts.length} produto(s)
+                </p>
+                <span className="text-sm opacity-60">
+                  Feito em {dayjs(order.createdAt).format("DD/MM/YYYY")}
+                </span>
+              </div>
+
+              <div className="hidden flex-1 font-bold lg:block">
+                <p>Status</p>
+                <p
+                  className={`${
+                    order.status === OrderStatus.WAITING_FOR_PAYMENT
+                      ? "text-primary"
+                      : "text-green-500"
+                  }`}
+                >
+                  {formatStatus(order.status)}
+                </p>
+              </div>
+
+              <div className="hidden flex-1 lg:block">
+                <p className="font-bold">Data</p>
+                <p className="opacity-75">
+                  {dayjs(order.createdAt).format("DD/MM/YYYY")}
+                </p>
+              </div>
+
+              <div className="hidden flex-1 lg:block">
+                <p className="text-xs font-bold lg:text-sm">Pagamento</p>
+                <p className="text-xs opacity-60 lg:text-sm">Cartão</p>
+              </div>
             </div>
           </AccordionTrigger>
           <AccordionContent>
             <div className="flex flex-col space-y-2">
-              <div className="flex items-center justify-between">
+              <div className="flex items-center justify-between lg:hidden">
                 <div className="font-bold">
                   <p>Status</p>
                   <p

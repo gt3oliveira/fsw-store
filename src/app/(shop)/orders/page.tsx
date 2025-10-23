@@ -1,7 +1,7 @@
 import { authOptions } from "@/lib/auth";
 import { PackageCheckIcon } from "lucide-react";
 import { getServerSession } from "next-auth";
-import { OrderItem } from "./_components/order-item";
+import { OrderItem } from "../../../components/order-item";
 import { getOrders } from "@/actions/getOrders";
 import { Badge } from "@/components/ui/badge";
 
