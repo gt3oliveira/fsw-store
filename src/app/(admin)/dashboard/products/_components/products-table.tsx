@@ -1,11 +1,13 @@
 import { DataTable } from "@/components/ui/data-table";
 import { ProductWithTotalPrice } from "@/helpers/product";
-import { columns } from "./columns";
+import { columnsProducts } from "./columns";
+import { OrderProduct } from "@prisma/client";
 
 export type ProductWithTotalPriceAndCategory = ProductWithTotalPrice & {
   category: {
     name: string;
   };
+  orderProduct: OrderProduct[];
 };
 
 interface ProductsTableProps {
@@ -15,7 +17,7 @@ interface ProductsTableProps {
 export const ProductsTable = ({ products }: ProductsTableProps) => {
   return (
     <div>
-      <DataTable columns={columns} data={products} />
+      <DataTable columns={columnsProducts} data={products} />
     </div>
   );
 };
