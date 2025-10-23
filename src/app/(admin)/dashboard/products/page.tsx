@@ -1,4 +1,3 @@
-import { getProducts } from "@/actions/getProducts";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { PackageIcon, PlusIcon } from "lucide-react";
@@ -7,9 +6,10 @@ import {
   ProductWithTotalPriceAndCategory,
 } from "./_components/products-table";
 import { computeProductTotalPrice } from "@/helpers/product";
+import { getProductsTable } from "@/actions/getProductsTable";
 
 export default async function ProductsPage() {
-  const products = await getProducts();
+  const products = await getProductsTable();
   const productsWithTotalPrice: ProductWithTotalPriceAndCategory[] =
     products.map((product) => ({
       ...product,
