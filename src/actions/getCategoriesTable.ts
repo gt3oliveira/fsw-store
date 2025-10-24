@@ -6,6 +6,8 @@ export const getCategoriesTable = async () => {
       products: {
         select: {
           id: true,
+          categoryId: true,
+          orderProduct: true,
         },
       },
     },
